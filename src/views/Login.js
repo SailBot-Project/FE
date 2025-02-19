@@ -10,7 +10,15 @@ import {
   Button,
 } from "reactstrap";
 
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/starter");
+  };
+
   return (
     <Container fluid className="vh-100 vw-100 d-flex">
       <Row className="w-75 shadow rounded">
@@ -48,12 +56,12 @@ const Login = () => {
             </FormGroup>
 
             {/* 로그인 버튼 */}
-            <Button color="info" className="w-100 mb-2">
+            <Button color="info" className="w-100 mb-2" onClick={handleLogin}>
               로그인
             </Button>
 
             {/* 회원가입 버튼 */}
-            <Button color="info" outline className="w-100">
+            <Button color="info" className="w-100">
               회원가입
             </Button>
           </Form>
