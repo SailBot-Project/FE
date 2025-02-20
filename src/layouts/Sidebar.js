@@ -9,15 +9,17 @@ const navigation = [
     icon: "bi bi-speedometer2",
   },
   {
-    title: "평가목록",
+    title: "등록",
+    href: "/register",
+  },
+  {
+    title: "피드백 분류",
+    href: "/feedback",
   },
   {
     title: "개선사항",
   },
-  {
-    title: "VOC 등록",
-    href: "/register",
-  },
+  
 ];
 
 const Sidebar = () => {
