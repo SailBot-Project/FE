@@ -6,6 +6,7 @@ const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
 
+const Login = lazy(() => import("../views/Login.js"));
 const Starter = lazy(() => import("../views/Starter.js"));
 const Register = lazy(() => import("../views/ui/Register.js"));
 const About = lazy(() => import("../views/About.js"));
@@ -25,7 +26,9 @@ const ThemeRoutes = [
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", element: <Navigate to="/starter" /> },
+      { path: "/login", element: <Login /> },
+      /*** 일단 Login 화면으로 ***/
+      { path: "/", element: <Navigate to="/login" /> },
       { path: "/starter", exact: true, element: <Starter /> },
       { path: "/about", exact: true, element: <About /> },
       { path: "/register", exact: true, element: <Register /> },
