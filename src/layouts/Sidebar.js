@@ -14,6 +14,10 @@ const navigation = [
     href: "/register",
   },
   {
+    title: "피드백 분류",
+    href: "/feedback",
+  },
+  {
     title: "Alert",
     href: "/alerts",
     icon: "bi bi-bell",
