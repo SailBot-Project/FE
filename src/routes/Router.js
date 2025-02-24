@@ -10,6 +10,7 @@ const Login = lazy(() => import("../views/Login.js"));
 const Starter = lazy(() => import("../views/Starter.js"));
 const Register = lazy(() => import("../views/ui/Register.js"));
 const Feedback = lazy(() => import("../views/ui/Feedback.js"));
+const Improvement = lazy(() => import("../views/ui/Improvement.js"));
 const About = lazy(() => import("../views/About.js"));
 const Alerts = lazy(() => import("../views/ui/Alerts"));
 const Badges = lazy(() => import("../views/ui/Badges"));
@@ -34,6 +35,7 @@ const ThemeRoutes = [
       { path: "/about", exact: true, element: <About /> },
       { path: "/register", exact: true, element: <Register /> },
       { path: "/feedback", exact: true, element: <Feedback /> },
+      { path: "/improvement", exact: true, element: <Improvement /> },
       { path: "/alerts", exact: true, element: <Alerts /> },
       { path: "/badges", exact: true, element: <Badges /> },
       { path: "/buttons", exact: true, element: <Buttons /> },

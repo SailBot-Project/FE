@@ -45,9 +45,14 @@ const Feedback = () => {
       });
     }
 
-    filtered.sort((a, b) => dateSort === 'asc' ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date));
+    filtered.sort((a, b) => dateSort === 'asc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
     setFilteredData(filtered);
   };
+
+  useEffect(() => {
+    // 초기 데이터 정렬 적용
+    setFilteredData(data.sort((a, b) => new Date(b.date) - new Date(a.date)));
+  }, []);
 
   useEffect(() => {
     applyFilters();
