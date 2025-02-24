@@ -1,82 +1,83 @@
-import { Col, Row } from "reactstrap";
-import SalesChart from "../components/dashboard/SalesChart";
-import Feeds from "../components/dashboard/Feeds";
-import ProjectTables from "../components/dashboard/ProjectTable";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardText,
+  CardTitle,
+  Col,
+  Row,
+} from "reactstrap";
+import VocChart from "../components/dashboard/VocChart";
+import ImprovementChart from "../components/dashboard/ImprovementChart";
+import { Badge } from "reactstrap";
 
-import Blog from "../components/dashboard/Blog";
-import bg1 from "../assets/images/bg/bg1.jpg";
-import bg2 from "../assets/images/bg/bg2.jpg";
-import bg3 from "../assets/images/bg/bg3.jpg";
-import bg4 from "../assets/images/bg/bg4.jpg";
-
-const BlogData = [
-  {
-    image: bg1,
-    title: "This is simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg2,
-    title: "Lets be simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg3,
-    title: "Don't Lamp blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg4,
-    title: "Simple is beautiful",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-];
+function LegendItem({ color, text, textSize }) {
+  const dotStyle = {
+    width: "15px",
+    height: "15px",
+    borderRadius: "50%",
+    padding: "0",
+    marginRight: "8px",
+    display: "inline-block",
+  };
+  return (
+    <div className="d-flex align-items-center mb-2">
+      <Badge style={dotStyle} color={color} />
+      <span className={textSize}>{text}</span>
+    </div>
+  );
+}
 
 const Starter = () => {
   return (
     <div>
-      {/***Top Cards***/}
+      <Row className="mb-5" style={{ height: "50vh" }}>
+        <Col className="h-100">
+          <Card className="h-100">
+            <CardHeader>고객의 소리</CardHeader>
+            <div className="h-100 d-flex flex-column justify-content-center align-items-center ">
+              <LegendItem color="primary" text="긍정 : 50개" textSize="fs-5" />
+              <LegendItem color="danger" text="부정 : 50개" textSize="fs-5" />
+              <LegendItem
+                color="warning"
+                text="개선사항 : 50개"
+                textSize="fs-5"
+              />
+            </div>
+          </Card>
+        </Col>
 
-      {/***Sales & Feed***/}
-      <Row>
-        <Col sm="6" lg="6" xl="7" xxl="8">
-          <SalesChart />
-        </Col>
-        <Col sm="6" lg="6" xl="5" xxl="4">
-          <Feeds />
+        <Col className="h-100">
+          <Card className="h-100">
+            <CardHeader>고객의 소리 (차트)</CardHeader>
+            <VocChart />
+          </Card>
         </Col>
       </Row>
-      {/***Table ***/}
-      <Row>
-        <Col lg="12">
-          <ProjectTables />
+
+      <Row className="mb-5" style={{ height: "50vh" }}>
+        <Col className="h-100">
+          <Card className="h-100">
+            <CardHeader>개선사항</CardHeader>
+            <div className="h-100 d-flex flex-column justify-content-center align-items-center ">
+              <LegendItem
+                color="require"
+                text="개선 필요 : 50개"
+                textSize="fs-5"
+              />
+              <LegendItem color="improve" text="개선 : 50개" textSize="fs-5" />
+              <LegendItem color="test" text="테스트 : 50개" textSize="fs-5" />
+              <LegendItem color="complete" text="완료 : 50개" textSize="fs-5" />
+            </div>
+          </Card>
         </Col>
-      </Row>
-      {/***Blog Cards***/}
-      <Row>
-        {BlogData.map((blg, index) => (
-          <Col sm="6" lg="6" xl="3" key={index}>
-            <Blog
-              image={blg.image}
-              title={blg.title}
-              subtitle={blg.subtitle}
-              text={blg.description}
-              color={blg.btnbg}
-            />
-          </Col>
-        ))}
+
+        <Col className="h-100">
+          <Card className="h-100">
+            <CardHeader>개선사항 (차트)</CardHeader>
+            <ImprovementChart />
+          </Card>
+        </Col>
       </Row>
     </div>
   );
