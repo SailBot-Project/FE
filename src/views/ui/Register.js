@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 const Register = () => {
   const [csvContent, setCsvContent] = useState("");
+  const [fileName, setFileName] = useState("선택안함");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    // CSV 파일 MIME 타입은 'text/csv' 혹은 'application/vnd.ms-excel'일 수 있음
     if (file && (file.type === "text/csv" || file.name.endsWith(".csv"))) {
+      setFileName(file.name);
       const reader = new FileReader();
       reader.onload = (event) => {
         setCsvContent(event.target.result);
@@ -18,23 +19,31 @@ const Register = () => {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>CSV 파일 업로드</h1>
-      <input type="file" accept=".csv,text/csv" onChange={handleFileChange} />
-      {csvContent && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>업로드된 CSV 내용</h2>
-          <pre
-            style={{
-              background: "#f4f4f4",
-              padding: "10px",
-              borderRadius: "4px",
-            }}
-          >
-            {csvContent}
-          </pre>
-        </div>
-      )}
+    <div className="d-flex flex-column p-6 ">
+      <h3 className="text-lg font-bold">파일업로드</h3>
+      <div className="d-flex">
+        <label className="btn btn-button rounded-pill">
+          <input
+            type="file"
+            accept=".csv,text/csv"
+            onChange={handleFileChange}
+            hidden
+          />
+          <span className="m-2">파일 선택</span>
+        </label>
+      </div>
+      <div className="d-flex justify-content-center">
+        <button className="bg-button mt-2 px-4 py-2 rounded-pill">
+          변환하기
+        </button>
+      </div>
+      <div className="w-full max-w-3xl mt-4 border rounded-md overflow-hidden">
+        <div className="bg-gray-300 px-4 py-2 font-bold">파일내용</div>
+        <div className="p-4 bg-white min-h-[200px]"></div>
+      </div>
+      <div className="d-flex justify-content-center">
+        <button className="bg-button mt-2 px-4 py-2 rounded-pill">등록</button>
+      </div>
     </div>
   );
 };
