@@ -14,6 +14,10 @@ $warning: #ffbc34;
 $dark: #343a40;
 $light: #eaf2fb;
 $secondary: #41c9e2;
+$require: #ff0004;
+$improve: #ff9900;
+$test: #ffee00;
+$complete: #46bc06;
 
 $theme-colors: (
   "primary": $primary,
@@ -24,6 +28,10 @@ $theme-colors: (
   "danger": $danger,
   "light": $light,
   "dark": $dark,
+  "require": $require,
+  "improve": $improve,
+  "test": $test,
+  "complete": $complete,
   "light-primary": #d6e4f3,
   "light-success": #d5f3f2,
   "light-info": #d3edfa,
