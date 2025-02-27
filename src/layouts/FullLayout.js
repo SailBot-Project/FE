@@ -5,7 +5,8 @@ import { Container } from "reactstrap";
 
 const FullLayout = () => {
   const location = useLocation();
-  const hideSidebar = location.pathname == "/login";
+  const hideSidebar =
+    location.pathname == "/login" || location.pathname == "/signup";
 
   return (
     <main>
