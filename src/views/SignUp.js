@@ -36,7 +36,7 @@ const SignUp = () => {
           className="h-100 d-flex justify-content-center align-items-center"
         >
           <div className="w-100 p-5">
-            <h4 className="mb-4 text-muted">로그인</h4>
+            <h4 className="mb-4 text-muted">회원가입</h4>
             <Form>
               {/* 이메일 입력 */}
               <FormGroup>
