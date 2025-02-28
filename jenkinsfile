@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "sailbot/react-app"
-        DOCKER_CREDENTIALS = "sailbot-dockerhub"
+        DOCKER_CREDENTIALS = "docker-hub-credentials"
         IMAGE_TAG = "latest"
     }
 
@@ -11,18 +11,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Build React App') {
-            steps {
-                sh 'npm run build'
             }
         }
 
