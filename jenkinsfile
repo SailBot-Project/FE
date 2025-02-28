@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'release', url: 'https://github.com/SailBot-Project/FE.git'
+                git branch: 'release/*', url: 'https://github.com/SailBot-Project/FE.git'
             }
         }
 
