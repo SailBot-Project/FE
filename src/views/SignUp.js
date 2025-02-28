@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Container,
   Row,
@@ -12,15 +13,11 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
 
-  const handleLogin = (sign) => {
-    if (sign) {
-      navigate("/starter");
-    } else {
-      navigate("/signup");
-    }
+  const handleSignUp = () => {
+    navigate("/starter");
   };
 
   return (
@@ -39,7 +36,7 @@ const Login = () => {
           className="h-100 d-flex justify-content-center align-items-center"
         >
           <div className="w-100 p-5">
-            <h4 className="mb-4 text-muted">로그인</h4>
+            <h4 className="mb-4 text-muted">회원가입</h4>
             <Form>
               {/* 이메일 입력 */}
               <FormGroup>
@@ -67,21 +64,27 @@ const Login = () => {
                 />
               </FormGroup>
 
-              {/* 로그인 버튼 */}
-              <Button
-                color="info"
-                className="w-100 mb-2"
-                onClick={() => handleLogin(true)}
-              >
-                로그인
-              </Button>
+              <FormGroup>
+                <Label for="name" className="text-muted">
+                  이름
+                </Label>
+                <Input type="name" name="name" id="name" placeholder="이름" />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="companyName" className="text-muted">
+                  이름
+                </Label>
+                <Input
+                  type="companyName"
+                  name="companyName"
+                  id="companyName"
+                  placeholder="회사이름"
+                />
+              </FormGroup>
 
               {/* 회원가입 버튼 */}
-              <Button
-                color="info"
-                className="w-100"
-                onClick={() => handleLogin(false)}
-              >
+              <Button color="info" className="w-100" onClick={handleSignUp}>
                 회원가입
               </Button>
             </Form>
@@ -92,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
