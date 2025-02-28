@@ -1,0 +1,77 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "sailbot/react-app"
+        DOCKER_REPO = "sailbot/sailbot_repo"
+        DOCKER_CREDENTIALS = "docker-hub-credentials"
+        IMAGE_TAG = "latest"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'release', url: 'https://github.com/SailBot-Project/FE.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build React App') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+         stage('Build Docker Image') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKER_IMAGE} ."
+                }
+            }
+        }
+
+        stage('Tag Docker Image') {
+            steps {
+                script {
+                    sh "docker tag ${DOCKER_IMAGE} ${DOCKER_REPO}:${TAG}"
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    sh "echo \$DOCKER_HUB_PASSWORD | docker login -u \$DOCKER_HUB_USERNAME --password-stdin"
+                }
+            }
+        }
+
+         stage('Push to Docker Hub') {
+            steps {
+                script {
+                    sh "docker push ${DOCKER_REPO}:${TAG}"
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh "docker rmi $DOCKER_IMAGE:$IMAGE_TAG || true"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "도커허브 업로드!"
+        }
+        failure {
+            echo "업로드 실패"
+        }
+    }
+}
