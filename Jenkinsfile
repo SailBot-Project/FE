@@ -12,7 +12,7 @@ pipeline {
     }
 
     triggers {
-        pollSCM('H/5 * * * *') // 5분마다 GitHub 변경 사항 확인
+        githubPush()
     }
 
     stages {
