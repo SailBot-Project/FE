@@ -58,7 +58,7 @@ pipeline {
             echo "Docker Hub에 성공적으로 업로드됨!"
         }
         failure {
-            echo "빌드 또는 업로드 실패!!!!!!"
+            echo "빌드 또는 업로드 실패!!!!!!!!"
         }
     }
 }
