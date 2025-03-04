@@ -22,16 +22,6 @@ pipeline {
             }
         }
 
-
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh "docker buildx build --platform linux/amd64 -t ${DOCKER_IMAGE}:${IMAGE_TAG} ."
-                }
-            }
-        }
-
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
@@ -40,14 +30,15 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Build & Push Docker Image') {
             steps {
                 script {
-                    sh "docker push ${DOCKER_IMAGE}:${IMAGE_TAG}"
+                    sh "docker buildx build --platform linux/amd64 -t ${DOCKER_IMAGE}:${IMAGE_TAG} --push ."
                 }
             }
         }
 
+      
         stage('Cleanup') {
             steps {
                 sh "docker rmi ${DOCKER_IMAGE}:${IMAGE_TAG} || true"
