@@ -7,6 +7,7 @@ pipeline {
         IMAGE_TAG = "latest"
         DEPLOY_SERVER = "54.180.152.40"
         DEPLOY_USER = "ec2-user"
+        CONTAINER_NAME = "frontend-container"
     }
     options {
         disableConcurrentBuilds()  // 동시에 여러 빌드 실행 방지
@@ -48,14 +49,21 @@ pipeline {
             steps {
                 script {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_SERVER} << EOF
-                        docker pull ${DOCKER_IMAGE}:${IMAGE_TAG}
-                        docker stop my-running-container || true
-                        docker rm my-running-container || true
-                        docker rmi \$(docker images -q ${DOCKER_IMAGE}) || true  # 기존 이미지 삭제 (태그 없이)
-                        docker run -d --name my-running-container -p 80:80 ${DOCKER_IMAGE}:${IMAGE_TAG}
-                    EOF
-                    """
+                        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
+                        echo "Stopping and removing existing container..."
+                        docker stop $CONTAINER_NAME || true
+                        docker rm $CONTAINER_NAME || true
+                        
+                        echo "Pulling new Docker image..."
+                        docker pull $DOCKER_IMAGE
+                        
+                        echo "Starting new container..."
+                        docker run -d -p 80:80 --name $CONTAINER_NAME $DOCKER_IMAGE
+                        
+                        echo "Deployment complete. Checking logs..."
+                        docker logs -f $CONTAINER_NAME
+                        EOF
+                        """
                 }
             }
         }
