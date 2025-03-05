@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
+                        ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_SERVER << EOF
                         echo "Stopping and removing existing container..."
                         docker stop $CONTAINER_NAME || true
                         docker rm $CONTAINER_NAME || true
