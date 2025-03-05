@@ -37,10 +37,16 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker buildx create --use || true  # 이미 buildx 인스턴스가 있으면 패스
-                    docker buildx inspect --bootstrap  # buildx 활성화 확인
-                    docker buildx build --platform linux/amd64 -t ${DOCKER_IMAGE}:${IMAGE_TAG} --push .
-                    """
+     # 기존 빌더가 있는지 확인 후 생성 (이미 존재하면 생성 안 함)
+    if ! docker buildx ls | grep -q mybuilder; then
+        docker buildx create --name mybuilder --use
+    else
+        docker buildx use mybuilder
+    fi
+
+    # Build & Push 실행
+    docker buildx build --platform linux/amd64 -t $DOCKER_IMAGE --push .
+"""
                 }
             }
         }
