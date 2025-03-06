@@ -6,9 +6,9 @@ const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
 
-const Login = lazy(() => import("../views/Login.js"));
+const Login = lazy(() => import(/* webpackPrefetch: true */ "../views/Login.js"));
 const SignUp = lazy(() => import("../views/SignUp.js"));
-const Starter = lazy(() => import("../views/Starter.js"));
+const Starter = lazy(() => import(/* webpackPrefetch: true */ "../views/Starter.js"));
 const Register = lazy(() => import("../views/ui/Register.js"));
 const Feedback = lazy(() => import("../views/ui/Feedback.js"));
 const Improvement = lazy(() => import("../views/ui/Improvement.js"));
