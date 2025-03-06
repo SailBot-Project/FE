@@ -13,7 +13,7 @@ const root = createRoot(rootElement);
 
 root.render(
   <Suspense fallback={<Loader />}>
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </Suspense>
